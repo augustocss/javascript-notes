@@ -1,11 +1,12 @@
 import { Fragment } from 'react';
 import './App.scss';
-import Header from './components/header';
+import HomeScreen from './screens/home';
+import Rotas from './routes';
 
 const App = () => {
   return (
     <Fragment>
-      <Header />
+      <Rotas />
     </Fragment>
   )
 }
