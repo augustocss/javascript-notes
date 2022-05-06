@@ -8,8 +8,9 @@ const RegisterScreen = () => (
     <Fragment>
         <Header />
         <section className="section is-medium auth">
-            <div className="container">
+            <div className="container ">
                 <div className="columns">
+                    <div className="column is-4"></div>
                     <div className="column is-4">
                         <div className="card">
                             <div className="card-content">
