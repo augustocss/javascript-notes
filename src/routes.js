@@ -9,6 +9,7 @@ import RegisterScreen from './screens/auth/register';
 import LoginScreen from './screens/auth/login';
 import NotesIndexScreen from './screens/notes/index';
 import UserEditScreen from './screens/users/edit';
+import PrivateRouter from "./components/auth/private_router";
 
 const Rotas = () => (
     <BrowserRouter>
@@ -16,8 +17,16 @@ const Rotas = () => (
             <Route exact path="/" element={<HomeScreen />} />
             <Route exact path='/register' element={<RegisterScreen />} />
             <Route exact path='/login' element={<LoginScreen />} />
-            <Route exact path='/notes' element={<NotesIndexScreen />} />
-            <Route exact path='/users/edit' compelementonent={<UserEditScreen />} />
+            <Route exact path='/notes' element={
+                <PrivateRouter>
+                    <NotesIndexScreen />
+                </PrivateRouter>
+            } />
+            <Route exact path='/users/edit' element={
+                <PrivateRouter>
+                    <UserEditScreen />
+                </PrivateRouter>
+            } />
         </Routes>
     </BrowserRouter >
 );

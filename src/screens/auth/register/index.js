@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import Header from '../../../components/header';
 import logoImage from '../../../assets/images/logo.png';
 import '../../../styles/auth.scss';
-
+import RegisterForm from '../../../components/auth/register_form'
 
 const RegisterScreen = () => (
     <Fragment>
@@ -27,6 +27,7 @@ const RegisterScreen = () => (
                                             </h6>
                                         </div>
                                     </div>
+                                    <RegisterForm />
                                 </section>
                             </div>
                         </div>
