@@ -3,6 +3,7 @@ import '../../styles/notes.scss';
 import { push as Menu } from 'react-burger-menu';
 import List from "../notes/list";
 import Editor from "../notes/editor";
+import Search from "../notes/search";
 import NoteService from '../../services/notes';
 
 const Notes = (props) => {
@@ -33,6 +34,21 @@ const Notes = (props) => {
         fetchNotes();
     }
 
+    const updateNote = async (oldNote, params) => {
+        const updatedNote = await NoteService.update(oldNote._id, params);
+        const index = notes.indexOf(oldNote);
+        const newNotes = notes;
+        newNotes[index] = updatedNote.data;
+        console.log(updatedNote.data);
+        setNotes(newNotes);
+        setCurrentNote(updatedNote.data);
+    }
+
+    const searchNotes = async (query) => {
+        const response = await NoteService.search(query);
+        setNotes(response.data);
+    }
+
     const selectNote = (id) => {
         const note = notes.find((note) => {
             return note._id == id;
@@ -54,20 +70,23 @@ const Notes = (props) => {
                 >
                     <div className="columns">
                         <div className="column is-10 is-offset-1">
-                            Search...
+                        <Search searchNotes={searchNotes} fetchNotes={fetchNotes} />
                         </div>
                     </div>
                     <List
                         notes={notes}
                         selectNote={selectNote}
-                        current_note={current_note} 
+                        current_note={current_note}
                         createNote={createNote}
                         deleteNote={deleteNote} />
                 </Menu>
 
 
                 <div className="column is-12 notes-editor" id="notes-editor">
-                    <Editor note={current_note} />
+                    <Editor
+                        note={current_note}
+                        updateNote={updateNote}
+                    />
                 </div>
             </div>
         </Fragment>
